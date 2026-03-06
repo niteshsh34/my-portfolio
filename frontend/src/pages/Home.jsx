@@ -1,31 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import MemoryGame from '../components/MemoryGame.jsx';
-import NumberGuessingGame from '../components/NumberGuessingGame.jsx';
+import React, { useState, useEffect } from "react";
+import MemoryGame from "../components/MemoryGame.jsx";
+import NumberGuessingGame from "../components/NumberGuessingGame.jsx";
 
 const Home = () => {
   // Typing effect states
-  const [displayText, setDisplayText] = useState('');
+  const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
-  const fullText = 'MERN Stack Developer';
+  const fullText = "Full Stack Developer";
 
   // Quote states
-  const [quote, setQuote] = useState('');
-  const [author, setAuthor] = useState('');
+  const [quote, setQuote] = useState("");
+  const [author, setAuthor] = useState("");
   const [loadingQuote, setLoadingQuote] = useState(false);
 
   // Local quotes array as fallback
   const localQuotes = [
-    { q: "The only way to do great work is to love what you do.", a: "Steve Jobs" },
+    {
+      q: "The only way to do great work is to love what you do.",
+      a: "Steve Jobs",
+    },
     { q: "Believe you can and you're halfway there.", a: "Theodore Roosevelt" },
-    { q: "The future belongs to those who believe in the beauty of their dreams.", a: "Eleanor Roosevelt" },
+    {
+      q: "The future belongs to those who believe in the beauty of their dreams.",
+      a: "Eleanor Roosevelt",
+    },
     { q: "You miss 100% of the shots you don't take.", a: "Wayne Gretzky" },
-    { q: "The best way to predict the future is to create it.", a: "Peter Drucker" },
-    { q: "Don't watch the clock; do what it does. Keep going.", a: "Sam Levenson" },
-    { q: "The only limit to our realization of tomorrow will be our doubts of today.", a: "Franklin D. Roosevelt" },
-    { q: "Keep your face always toward the sunshine—and shadows will fall behind you.", a: "Walt Whitman" },
-    { q: "The way to get started is to quit talking and begin doing.", a: "Walt Disney" },
-    { q: "Your time is limited, so don't waste it living someone else's life.", a: "Steve Jobs" }
+    {
+      q: "The best way to predict the future is to create it.",
+      a: "Peter Drucker",
+    },
+    {
+      q: "Don't watch the clock; do what it does. Keep going.",
+      a: "Sam Levenson",
+    },
+    {
+      q: "The only limit to our realization of tomorrow will be our doubts of today.",
+      a: "Franklin D. Roosevelt",
+    },
+    {
+      q: "Keep your face always toward the sunshine—and shadows will fall behind you.",
+      a: "Walt Whitman",
+    },
+    {
+      q: "The way to get started is to quit talking and begin doing.",
+      a: "Walt Disney",
+    },
+    {
+      q: "Your time is limited, so don't waste it living someone else's life.",
+      a: "Steve Jobs",
+    },
   ];
 
   /* -------------------- Typing Effect -------------------- */
@@ -57,15 +81,18 @@ const Home = () => {
   const fetchQuote = async () => {
     try {
       setLoadingQuote(true);
-      const res = await fetch(`https://api.quotable.io/random?timestamp=${new Date().getTime()}&random=${Math.random()}`, {
-        method: 'GET',
-        cache: 'no-store',
-        headers: {
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Pragma': 'no-cache',
-          'Expires': '0'
+      const res = await fetch(
+        `https://api.quotable.io/random?timestamp=${new Date().getTime()}&random=${Math.random()}`,
+        {
+          method: "GET",
+          cache: "no-store",
+          headers: {
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            Pragma: "no-cache",
+            Expires: "0",
+          },
         }
-      });
+      );
       const data = await res.json();
       setQuote(data.content);
       setAuthor(data.author);
@@ -106,34 +133,34 @@ const Home = () => {
           <span className="border-r-2 border-blue-300 pr-1">{displayText}</span>
         </div>
 
-        <p className="text-lg text-gray-300 mb-12 max-w-2xl mx-auto">
-          Passionate about creating innovative web applications and solving complex problems.
+        <p className="text-lg text-gray-300 mb-2 max-w-2xl mx-auto">
+          Passionate about creating innovative web applications and solving
+          complex problems.
         </p>
-
-        {/* Games */}
-        <div className="mt-16">
-          <h2 className="text-3xl font-bold text-white mb-8">Mind Games</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white/10 rounded-xl p-6 border border-gray-600">
-              <h3 className="text-xl font-semibold text-white mb-4">🧠 Memory Match</h3>
-              <MemoryGame />
-            </div>
-
-            <div className="bg-white/10 rounded-xl p-6 border border-gray-600">
-              <h3 className="text-xl font-semibold text-white mb-4">🎯 Guess the Number</h3>
-              <NumberGuessingGame />
-            </div>
-          </div>
-        </div>
+        <p>
+          I am a Full-Stack Developer focused on building scalable,
+          high-performance web applications using modern technologies. I
+          specialize in crafting clean, intuitive user interfaces and designing
+          robust backend systems that power reliable, production-ready products.
+          With strong expertise in JavaScript, React, Node.js, and
+          database-driven architectures, I deliver end-to-end solutions with an
+          emphasis on performance, security, and maintainability. I bring a
+          problem-solving mindset backed by solid foundations in data
+          structures, algorithms, and core computer science principles.
+          Currently working as a Full-Stack Developer, I collaborate with
+          cross-functional teams to build real-world applications and
+          continuously refine systems that scale with business needs.
+        </p>
 
         {/* Quote Section */}
         <div className="mt-16">
-          <h2 className="text-3xl font-bold text-white mb-8">Daily Inspiration</h2>
+          <h2 className="text-3xl font-bold text-white mb-8">
+            Daily Inspiration
+          </h2>
 
           <div className="bg-white/10 rounded-xl p-8 border border-gray-600 max-w-2xl mx-auto">
             <blockquote className="text-xl text-gray-300 italic mb-4">
-              {loadingQuote ? 'Loading quote...' : `“${quote}”`}
+              {loadingQuote ? "Loading quote..." : `“${quote}”`}
             </blockquote>
             <cite className="text-lg text-purple-300">— {author}</cite>
 
@@ -143,6 +170,27 @@ const Home = () => {
             >
               Next Quote →
             </button>
+          </div>
+        </div>
+
+        {/* Games */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-bold text-white mb-8">Mind Games</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-white/10 rounded-xl p-6 border border-gray-600">
+              <h3 className="text-xl font-semibold text-white mb-4">
+                🧠 Memory Match
+              </h3>
+              <MemoryGame />
+            </div>
+
+            <div className="bg-white/10 rounded-xl p-6 border border-gray-600">
+              <h3 className="text-xl font-semibold text-white mb-4">
+                🎯 Guess the Number
+              </h3>
+              <NumberGuessingGame />
+            </div>
           </div>
         </div>
       </div>

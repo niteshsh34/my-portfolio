@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const Projects = () => {
   const [filter, setFilter] = useState("All");
   const [flippedCards, setFlippedCards] = useState({});
-  const [showGame, setShowGame] = useState(false);
-  const [gameScore, setGameScore] = useState(0);
 
   const projectsData = [
     {
@@ -12,6 +10,7 @@ const Projects = () => {
       tech: "ReactJS, JavaScript",
       period: "March 2025 – July 2025",
       category: "Frontend",
+      github: "https://github.com/niteshsh34",
       description: [
         "Developed a responsive React application using the REST Countries API to display country data dynamically.",
         "Implemented features including dark mode, search and filter, and dynamic data fetching for seamless user experience.",
@@ -23,12 +22,14 @@ const Projects = () => {
       tech: "MERN Stack",
       period: "December 2024 – March 2025",
       category: "Full Stack",
+      live: "https://job-portal-jp6z.onrender.com/",
+      github: "https://github.com/niteshsh34/job-portal",
       description: [
         "Developed a full-stack Job Portal to connect job seekers and recruiters.",
-        "Implemented user authentication and authorization for separate recruiter and applicant dashboards using JWT.",
-        "Enabled real-time job posting, search, and application tracking with dynamic filtering based on job type, skills, and location.",
-        "Integrated RESTful APIs for managing users, jobs, and applications with efficient CRUD operations.",
-        "Designed a responsive and modern UI ensuring smooth performance and accessibility across all devices.",
+        "Implemented user authentication and authorization using JWT.",
+        "Enabled job posting, search, and application tracking with dynamic filtering.",
+        "Integrated RESTful APIs with CRUD operations.",
+        "Designed a responsive UI ensuring smooth performance across all devices.",
       ],
     },
     {
@@ -36,11 +37,13 @@ const Projects = () => {
       tech: "MERN Stack",
       period: "December 2025 – Present",
       category: "Full Stack",
+      live: "https://text-to-image-generator-j81w.onrender.com/",
+      github: "https://github.com/niteshsh34/imagAI",
       description: [
-        "Developed a full-stack AI-driven web application using MongoDB, Express.js, ReactJS, and Node.js to generate images from text prompts.",
-        "Implemented user authentication and authorization with secure account creation and login flows.",
-        "Integrated AI image generation functionality using a third-party API (e.g., Clipdrop API) to convert user text into visual content.",
-        "Built a credit-based usage system and integrated online payment gateway enabling users to purchase additional credits for image generation.",
+        "Developed a full-stack AI-driven web application using MongoDB, Express.js, ReactJS, and Node.js.",
+        "Implemented secure authentication and authorization.",
+        "Integrated AI image generation API to convert text into visual content.",
+        "Built a credit-based usage system with payment gateway integration.",
       ],
     },
   ];
@@ -60,87 +63,6 @@ const Projects = () => {
       ...prev,
       [index]: !prev[index],
     }));
-  };
-
-  const TechStackGame = () => {
-    const [cards, setCards] = useState([]);
-    const [flipped, setFlipped] = useState([]);
-    const [matched, setMatched] = useState([]);
-    const [moves, setMoves] = useState(0);
-
-    const techStacks = [
-      "React",
-      "Node.js",
-      "MongoDB",
-      "Express",
-      "JavaScript",
-      "AI",
-    ];
-
-    useEffect(() => {
-      const shuffledCards = [...techStacks, ...techStacks]
-        .sort(() => Math.random() - 0.5)
-        .map((tech, index) => ({
-          id: index,
-          tech,
-          isFlipped: false,
-          isMatched: false,
-        }));
-      setCards(shuffledCards);
-    }, [techStacks]);
-
-    const handleCardClick = (id) => {
-      if (flipped.length === 2 || flipped.includes(id) || matched.includes(id))
-        return;
-
-      const newFlipped = [...flipped, id];
-      setFlipped(newFlipped);
-
-      if (newFlipped.length === 2) {
-        setMoves(moves + 1);
-        const [first, second] = newFlipped;
-        if (cards[first].tech === cards[second].tech) {
-          setMatched([...matched, first, second]);
-          setGameScore((prev) => prev + 10);
-          setFlipped([]);
-        } else {
-          setTimeout(() => setFlipped([]), 1000);
-        }
-      }
-    };
-
-    return (
-      <div className="mt-8 p-6 bg-gray-800 rounded-lg">
-        <h3 className="text-xl font-semibold mb-4 text-white">
-          Tech Stack Memory Game
-        </h3>
-        <p className="text-gray-300 mb-4">
-          Score: {gameScore} | Moves: {moves}
-        </p>
-        <div className="grid grid-cols-3 gap-4 max-w-md mx-auto">
-          {cards.map((card) => (
-            <div
-              key={card.id}
-              onClick={() => handleCardClick(card.id)}
-              className={`w-20 h-20 flex items-center justify-center rounded cursor-pointer transition-all duration-300 ${
-                flipped.includes(card.id) || matched.includes(card.id)
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-700 text-gray-700"
-              }`}
-            >
-              {flipped.includes(card.id) || matched.includes(card.id)
-                ? card.tech
-                : "?"}
-            </div>
-          ))}
-        </div>
-        {matched.length === cards.length && (
-          <p className="text-green-400 mt-4">
-            Congratulations! You matched all tech stacks!
-          </p>
-        )}
-      </div>
-    );
   };
 
   return (
@@ -164,18 +86,7 @@ const Projects = () => {
             </button>
           ))}
         </div>
-
-        {/* Toggle Game Button */}
-        <button
-          onClick={() => setShowGame(!showGame)}
-          className="mb-8 px-6 py-3 bg-green-500 text-white rounded-full font-semibold hover:bg-green-600 transition-colors duration-300"
-        >
-          {showGame ? "Hide Tech Stack Game" : "Play Tech Stack Game"}
-        </button>
       </div>
-
-      {/* Tech Stack Game */}
-      {showGame && <TechStackGame />}
 
       {/* Project Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -190,16 +101,41 @@ const Projects = () => {
                 flippedCards[index] ? "rotate-y-180" : ""
               }`}
             >
-              {/* Front of Card */}
+              {/* Front Side */}
               <div className="absolute inset-0 w-full h-full backface-hidden bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg p-6 flex flex-col justify-center items-center text-white">
                 <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+
                 <p className="text-sm opacity-90">{project.tech}</p>
                 <p className="text-xs opacity-75 mt-2">{project.period}</p>
+
+                {/* Links */}
+                <div className="flex gap-3 mt-4">
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1 bg-green-500 rounded text-sm hover:bg-green-600"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Live
+                  </a>
+
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1 bg-gray-700 rounded text-sm hover:bg-gray-800"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    GitHub
+                  </a>
+                </div>
+
                 <div className="mt-4 text-4xl">🔄</div>
                 <p className="text-xs mt-2">Click to flip</p>
               </div>
 
-              {/* Back of Card */}
+              {/* Back Side */}
               <div className="absolute inset-0 w-full h-full backface-hidden rotate-y-180 bg-gray-800 rounded-lg p-6 flex flex-col overflow-y-auto">
                 <div>
                   <h3 className="text-xl font-semibold text-white mb-2">

@@ -14,7 +14,7 @@ const Achievements = () => {
     },
     {
       title: 'Competitive Programming',
-      description: 'Solved more than 300 problems on platforms such as LeetCode and GFG. Ranked under 200,000 globally and in the top 29% in contests on LeetCode.',
+      description: 'Solved more than 600 problems on platforms such as LeetCode and GFG. Ranked under 200,000 globally and in the top 29% in contests on LeetCode.',
       icon: '🏆',
       color: 'from-yellow-500 to-orange-500',
       emoji: '💪',

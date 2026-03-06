@@ -63,7 +63,7 @@ const MemoryGame = () => {
           <div
             key={card.id}
             onClick={() => handleCardClick(card.id)}
-            className={`w-16 h-16 flex items-center justify-center rounded cursor-pointer ${
+            className={`w-20 h-20 flex items-center justify-center rounded cursor-pointer text-7xl ${
               flipped.includes(card.id) || matched.includes(card.id)
                 ? 'bg-blue-500 text-white'
                 : 'bg-gray-700 text-gray-700'
