@@ -61,7 +61,7 @@ const Header = () => {
               <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" className="w-4 h-4" />
               <span className="text-xs text-gray-300">LinkedIn</span>
             </a>
-            <a href="https://github.com/niteshsh34674523" className="flex flex-col items-center">
+            <a href="https://github.com/niteshsh34" className="flex flex-col items-center">
               <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" className="w-4 h-4" />
               <span className="text-xs text-gray-300">GitHub</span>
             </a>
